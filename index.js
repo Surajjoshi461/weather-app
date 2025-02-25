@@ -1,4 +1,4 @@
-const url='http://api.weatherapi.com/v1/current.json'
+const url='https://api.weatherapi.com/v1/current.json'
 const apiKey= '4fd187ee1f404a6784393645252201'
 
 const cityName = document.getElementById('city-input');
@@ -7,8 +7,8 @@ const submitButton = document.getElementById('city-input-btn');
 async function getWeatherData(cityName){
    try{ 
         const weatherDetail= await fetch(`${url}?key=${apiKey}&q=${cityName}`);
-        console.log(weatherDetail.status);
-        if(weatherDetail.status===200)
+        console.log(weatherDetail?.status);
+        if(weatherDetail.status==200)
             return weatherDetail.json()
         else return alert('City not found. Please enter valid city')
 
@@ -28,7 +28,7 @@ document.getElementById('wind-speed').innerHTML = `Wind speed: ${weatherDetail.c
 
 submitButton.addEventListener("click", async()=>{
     const weatherDetail = await getWeatherData(cityName.value);
-    console.log('sd = >',weatherDetail.location.name);
+    console.log('sd = >',weatherDetail?.location?.name);
     sentWeatherDetailToUi(weatherDetail);
 
 })
